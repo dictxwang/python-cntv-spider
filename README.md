@@ -20,7 +20,7 @@ category.ini 主要记录分类ID和中文名称的对应关系 ID需要人工�
 common.ini 主要是[task]这个section的设置
     base_store： 指定一个本机磁盘路径就可以，确保当前用户有写权限（如不指定或者指定的路径不存在，下载的资源会保存到当前路径的"STORE"目录）
     spider_cate:  指定需要抓取的分类ID，分类ID来源同category.ini
-    max_page:  指定需要抓取的分类最大页数，设置的值越大，耗时会越长
+    max_page:  指定需要抓取的分类最大页数（设置的值越大，能抓取的视频时间越久远，耗时也越长）
     NOTE: spider_cate不建议设置太多，过多对机器资源消耗较大且有封IP的风险
           max_page也不建议设置过长
 **可以在多台机器上设置不同的参数，并行抓取
