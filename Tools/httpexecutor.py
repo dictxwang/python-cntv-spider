@@ -3,6 +3,7 @@ __author__ = 'qiangwang'
 
 from globalmodule import *
 import urllib2
+import random
 
 
 def readHtml(url):
@@ -18,7 +19,9 @@ def readHtml(url):
         proxy_handler = {}
         opener = None
         if configCache.get('use_proxy') == 1:
-            proxy_handler = urllib2.ProxyHandler({'http': configCache.get('proxy_address')})
+            #随机选择一个代理地址
+            random.shuffle(configCache.get('proxy_address'))
+            proxy_handler = urllib2.ProxyHandler({'http': configCache.get('proxy_address')[0]})
             opener = urllib2.build_opener(proxy_handler)
         else:
             opener = urllib2.build_opener()
@@ -41,7 +44,8 @@ def readAndSaveFile(url, filepath):
         proxy_handler = {}
         opener = None
         if configCache.get('use_proxy') == 1:
-            proxy_handler = urllib2.ProxyHandler({'http': configCache.get('proxy_address')})
+            random.shuffle(configCache.get('proxy_address'))
+            proxy_handler = urllib2.ProxyHandler({'http': configCache.get('proxy_address')[0]})
             opener = urllib2.build_opener(proxy_handler)
         else:
             opener = urllib2.build_opener()
@@ -60,7 +64,7 @@ def readAndSaveFile(url, filepath):
         else:
             fp.write(res.read())
         fp.close()
-        print 'save file:%s' % filepath
+        print '[OK] save file:%s' % filepath
         return True
     except:
         return False

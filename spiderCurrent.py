@@ -2,13 +2,23 @@
 __author__ = 'qiangwang'
 
 from Tools.globalmodule import *
-import Tools.finishdog
+import Tools.watchdog
 import Tools.httpexecutor
+from Tools.currentprocessor import doCategorySiper
+from multiprocessing import Process
 
 if __name__ == '__main__':
 
-    print cateCache.convertToName('C10190')
-    print configCache.get('user_agent')
-    print Tools.finishdog.hasFinished()
-    #print Tools.httpexecutor.readHtml('http://tv.cntv.cn/index.php?action=videoset-videolistbytype&class=lanmu&setid=VSET100152389250&istiyu=0&page=12')
-    print Tools.httpexecutor.readAndSaveFile('http://vod.cntv.lxdns.com/flash/mp4video41/TMS/wuxi/2015/05/13/b76d9f90b9643ddf588d37a30a4e5c44_h264418000nero_aac32-1.mp4', 'sss.mp4')
+    cates = configCache.get('spider_cate').split(',')
+    if not cates or len(cates) == 0:
+        print 'no category, job exit...'
+        exit()
+
+    #初始化存储空间，其他任务的必要过程
+    for cate in cates:
+        Tools.watchdog.initSotre(cate)
+
+    #以下开始多进程并行执行，每个分类一个进程
+    for cate in cates:
+        p = Process(target=doCategorySiper, args=(cate, configCache.get('max_page')))
+        p.start()
