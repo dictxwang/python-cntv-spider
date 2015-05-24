@@ -37,11 +37,13 @@ def hasFinished(cid, vid, isAll, part = 0):
     '''
     if isAll:
         fPre = 'all_'
+        fSuf = ''
     else:
-        fPre = 'video_%d_' % part
+        fPre = 'video_'
+        fSuf = '_%d' % part
     basedir = configCache.get('base_store')
     ciddir = basedir + '/' + cid
-    finishpath = ciddir + '/finished/' + fPre + vid + '.finish'
+    finishpath = ciddir + '/finished/' + fPre + vid + fSuf +'.finish'
     if os.path.isfile(finishpath):
         return True
     else:
@@ -58,11 +60,13 @@ def writeFinished(cid, vInfo, isAll, part = 0):
     '''
     if isAll:
         fPre = 'all_'
+        fSuf = ''
     else:
-        fPre = 'video_%d_' % part
+        fPre = 'video_'
+        fSuf = '_%d' % part
     basedir = configCache.get('base_store')
     ciddir = basedir + '/' + cid
-    finishpath = ciddir + '/finished/' + fPre + vInfo['vid'] + '.finish'
+    finishpath = ciddir + '/finished/' + fPre + vInfo['vid'] + fSuf + '.finish'
     fp = codecs.open(finishpath, mode='w', encoding='utf8')
     if isAll:
         fp.write(vInfo['day'] + '\n')
