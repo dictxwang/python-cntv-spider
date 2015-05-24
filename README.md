@@ -9,3 +9,4 @@ http://tv.cntv.cn/index.php?action=videoset-videolistbytype&class=lanmu&setid=C1
 2、获取视频资源下载信息
 pid=资源id（上一步返回的源码中可以找到）
 http://vdn.apps.cntv.cn/api/getHttpVideoInfo.do?pid=b76d9f90b9643ddf588d37a30a4e5c44&modifyed=false
+
