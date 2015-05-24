@@ -155,6 +155,8 @@ def doCategorySiper(cid, maxpage):
                         videos = vInfo['videos']
                         storeVideo = True
                         for i in range(0, len(videos)):
+                            if Tools.watchdog.hasFinished(cid, vid, False, i + 1):
+                                continue
                             item = videos[i]
                             item['day'] = vInfo['day']
                             item['vid'] = vInfo['vid']

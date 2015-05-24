@@ -38,13 +38,16 @@ def hasFinished(cid, vid, isAll, part = 0):
     if isAll:
         fPre = 'all_'
         fSuf = ''
+        ofPre = 'all_'
     else:
         fPre = 'video_'
         fSuf = '_%d' % part
+        ofPre = 'video_%d_' % part
     basedir = configCache.get('base_store')
     ciddir = basedir + '/' + cid
     finishpath = ciddir + '/finished/' + fPre + vid + fSuf +'.finish'
-    if os.path.isfile(finishpath):
+    ofinishpath = ciddir + '/finished/' + ofPre + vid +'.finish'
+    if os.path.isfile(finishpath) or os.path.isfile(ofinishpath):
         return True
     else:
         return False
