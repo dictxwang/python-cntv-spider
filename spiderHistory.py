@@ -3,4 +3,4 @@ __author__ = 'qiangwang'
 
 if __name__ == '__main__':
 
-    print 'HAHAHA'
+    print 'Time positive sequence'
