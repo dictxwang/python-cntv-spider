@@ -14,7 +14,7 @@ if __name__ == '__main__':
         print 'no category, job exit...'
         exit()
 
-    #初始化存储空间，其他任务的必要过程
+    #初始化存储空间，其他任务执行的必要过程
     for cate in cates:
         Tools.watchdog.initSotre(cate)
 
