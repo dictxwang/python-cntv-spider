@@ -5,7 +5,8 @@ from Tools.globalmodule import *
 import Tools.watchdog
 import Tools.httpexecutor
 from Tools.currentprocessor import doCategorySiper
-from multiprocessing import Process
+#from multiprocessing import Process
+from threading import Thread
 
 if __name__ == '__main__':
 
@@ -20,5 +21,8 @@ if __name__ == '__main__':
 
     #以下开始多进程并行执行，每个分类一个进程
     for cate in cates:
-        p = Process(target=doCategorySiper, args=(cate, configCache.get('max_page')))
-        p.start()
+        #p = Process(target=doCategorySiper, args=(cate, configCache.get('max_page')))
+        #p.start()
+        #改用多线程，有些版本的python多进程会出错
+        t = Thread(target=doCategorySiper, args=(cate, configCache.get('max_page')))
+        t.start()
